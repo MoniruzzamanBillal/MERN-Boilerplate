@@ -1,26 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PageRouter } from "./Router/Routes";
 
-// import pages:
-import Error from "./pages/Error";
-import Home from "./pages/Home";
-import Todo from "./pages/Todo";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AppProvider from "./Context/AuthContext";
+import StateProvider from "./Context/StateContext";
 
-// router:
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/todo",
-    element: <Todo />,
-  },
-  {
-    path: "/*",
-    element: <Error />,
-  },
-]);
+const queryClient = new QueryClient();
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AppProvider>
+      <StateProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={PageRouter} />;
+        </QueryClientProvider>
+      </StateProvider>
+    </AppProvider>
+  );
 }
