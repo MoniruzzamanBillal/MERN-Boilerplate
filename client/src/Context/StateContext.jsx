@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 
-const StateContext = createContext();
+export const StateContext = createContext();
 
 const StateProvider = ({ children }) => {
-  const [state, setState] = useState(null);
+  const [state, setState] = useState("test");
 
   const stateValue = { state };
 

@@ -8,9 +8,10 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../Utils/Firebase.config";
 
-export const AppContext = createContext();
+export const AuthContext = createContext();
 
 const AppProvider = ({ children }) => {
+  const [test, setTest] = useState("test in auth ");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
@@ -49,6 +50,7 @@ const AppProvider = ({ children }) => {
   const authValue = {
     loading,
     user,
+    test,
     registerFunction,
     loginFunction,
     logoutFunction,
@@ -56,7 +58,7 @@ const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={authValue}> {children} </AppContext.Provider>
+    <AuthContext.Provider value={authValue}> {children} </AuthContext.Provider>
   );
 
   //
